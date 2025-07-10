@@ -29,6 +29,11 @@ Target 3.D: Strengthen the capacity for early warning, risk reduction, and manag
 
 
 
+
+
+
+
+
 ⚙️ How It Works
 Key Features:
 
@@ -66,6 +71,13 @@ AI prediction model informs restocking decisions, reducing wastage and stockouts
 
 
 
+
+
+
+
+
+
+
 🌐 Live Demo
 👉 https:http://127.0.0.1:5000/
 
@@ -81,6 +93,11 @@ Alternatively, you can create your own account with a custom username and passwo
 
 
 
+
+
+
+
+
 📑 Pitch Deck
 View the project pitch deck detailing the problem statement, solution design, AI implementation, and expected impact:
 👉 https:https://gamma.app/docs/MediTrack-AI-Smart-Medicine-Stock-Tracking-Platform-4kbnmtn2tdsxm7k
@@ -89,9 +106,23 @@ View the project pitch deck detailing the problem statement, solution design, AI
 
 
 
+
+
+
+
+
+
 📌 Final Notes
 MediTrack AI addresses a real healthcare logistics problem through AI-enhanced decision-making tools. It’s designed to be scalable for both small clinics and large pharmacy chains, improving the availability of essential medicines where and when they’re needed most.
 ⚠️ This project currently runs with the Flask development server. For production deployment, consider using a WSGI server like Gunicorn or Waitress.
+
+
+
+
+
+
+
+
 
 
 
