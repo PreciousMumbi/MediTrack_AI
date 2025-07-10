@@ -1,7 +1,7 @@
 📖 MediTrack AI — README
 
 
-📌 OVERVIEW
+📌 OVERVIEW.
 
 
 
@@ -13,7 +13,7 @@ Built with a modern, responsive UI using HTML, CSS, Bootstrap, and JavaScript, a
 
 
 
-🌍 Sustainable Development Goal Alignment
+🌍 Sustainable Development Goal Alignment.
 
 
 
