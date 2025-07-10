@@ -1,0 +1,5 @@
+Flask
+flask_sqlalchemy
+sqlite3
+Werkzeug
+gunicorn

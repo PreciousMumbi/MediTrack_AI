@@ -1,0 +1,832 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MediTrack AI - Settings</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        /* Enhanced MediTrack AI Dashboard Styles */
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap');
+
+        :root {
+            --primary-color: #6366f1;
+            --primary-dark: #4f46e5;
+            --primary-light: #818cf8;
+            --secondary-color: #10b981;
+            --accent-color: #f59e0b;
+            --danger-color: #ef4444;
+            --warning-color: #f59e0b;
+            --success-color: #10b981;
+            --info-color: #06b6d4;
+            
+            --bg-primary: #0f172a;
+            --bg-secondary: #1e293b;
+            --bg-tertiary: #334155;
+            --bg-card: #1e293b;
+            --bg-glass: rgba(30, 41, 59, 0.8);
+            
+            --text-primary: #f1f5f9;
+            --text-secondary: #cbd5e1;
+            --text-muted: #94a3b8;
+            
+            --border-color: #334155;
+            --border-light: #475569;
+            
+            --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.3);
+            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.4), 0 2px 4px -1px rgba(0, 0, 0, 0.3);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.5), 0 4px 6px -2px rgba(0, 0, 0, 0.4);
+            --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.6), 0 10px 10px -5px rgba(0, 0, 0, 0.5);
+            --shadow-glow: 0 0 30px rgba(99, 102, 241, 0.3);
+            
+            --radius-sm: 0.5rem;
+            --radius-md: 0.75rem;
+            --radius-lg: 1rem;
+            --radius-xl: 1.5rem;
+            
+            --transition-fast: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+            --transition-normal: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            --transition-slow: 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #334155 100%);
+            color: var(--text-primary);
+            line-height: 1.6;
+            font-size: 14px;
+            min-height: 100vh;
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 20% 20%, rgba(99, 102, 241, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(16, 185, 129, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 50% 50%, rgba(245, 158, 11, 0.05) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        /* Enhanced Navigation */
+        .navbar {
+            background: rgba(30, 41, 59, 0.95) !important;
+            backdrop-filter: blur(20px);
+            box-shadow: var(--shadow-xl);
+            border-bottom: 1px solid rgba(99, 102, 241, 0.3);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .navbar-brand {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 700;
+            font-size: 1.75rem;
+            color: var(--text-primary) !important;
+            text-shadow: 0 0 20px rgba(99, 102, 241, 0.5);
+            transition: var(--transition-normal);
+            position: relative;
+        }
+
+        .navbar-brand::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+            transform: scaleX(0);
+            transition: var(--transition-normal);
+        }
+
+        .navbar-brand:hover::after {
+            transform: scaleX(1);
+        }
+
+        .navbar-brand:hover {
+            transform: translateY(-2px);
+            text-shadow: 0 0 30px rgba(99, 102, 241, 0.8);
+        }
+
+        .nav-link {
+            color: var(--text-secondary) !important;
+            font-weight: 500;
+            padding: 0.75rem 1.5rem !important;
+            border-radius: var(--radius-md);
+            transition: var(--transition-normal);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .nav-link::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(99, 102, 241, 0.3), transparent);
+            transition: var(--transition-slow);
+        }
+
+        .nav-link:hover::before {
+            left: 100%;
+        }
+
+        .nav-link:hover,
+        .nav-link.active {
+            color: var(--text-primary) !important;
+            background: rgba(99, 102, 241, 0.2);
+            box-shadow: var(--shadow-glow);
+            transform: translateY(-2px);
+        }
+
+        /* Enhanced Cards */
+        .card {
+            background: var(--bg-glass);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-xl);
+            box-shadow: var(--shadow-lg);
+            transition: var(--transition-normal);
+            overflow: hidden;
+            position: relative;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color), var(--accent-color));
+            opacity: 0;
+            transition: var(--transition-normal);
+        }
+
+        .card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-xl);
+        }
+
+        .card:hover::before {
+            opacity: 1;
+        }
+
+        .card-header {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%) !important;
+            border-bottom: none !important;
+            color: var(--text-primary) !important;
+            font-weight: 600;
+            font-size: 1.2rem;
+            padding: 1.5rem 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="1" fill="rgba(255,255,255,0.1)"/></svg>');
+            background-size: 40px 40px;
+            opacity: 0.3;
+            pointer-events: none;
+        }
+
+        .card-header.bg-success {
+            background: linear-gradient(135deg, var(--success-color) 0%, #059669 100%) !important;
+        }
+
+        .card-header.bg-danger {
+            background: linear-gradient(135deg, var(--danger-color) 0%, #dc2626 100%) !important;
+        }
+
+        .card-header.bg-warning {
+            background: linear-gradient(135deg, var(--warning-color) 0%, #d97706 100%) !important;
+        }
+
+        .card-header.bg-info {
+            background: linear-gradient(135deg, var(--info-color) 0%, #0891b2 100%) !important;
+        }
+
+        .card-body {
+            padding: 2rem;
+            background: var(--bg-glass);
+            backdrop-filter: blur(20px);
+        }
+
+        /* Enhanced Buttons */
+        .btn {
+            font-weight: 600;
+            border-radius: var(--radius-md);
+            padding: 0.875rem 2rem;
+            transition: var(--transition-normal);
+            position: relative;
+            overflow: hidden;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-size: 0.875rem;
+            border: none;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: var(--transition-normal);
+        }
+
+        .btn:hover::before {
+            left: 100%;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
+            box-shadow: var(--shadow-md);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-glow);
+        }
+
+        .btn-success {
+            background: linear-gradient(135deg, var(--success-color) 0%, #059669 100%);
+            box-shadow: var(--shadow-md);
+        }
+
+        .btn-danger {
+            background: linear-gradient(135deg, var(--danger-color) 0%, #dc2626 100%);
+            box-shadow: var(--shadow-md);
+        }
+
+        .btn-warning {
+            background: linear-gradient(135deg, var(--warning-color) 0%, #d97706 100%);
+            box-shadow: var(--shadow-md);
+        }
+
+        .btn-info {
+            background: linear-gradient(135deg, var(--info-color) 0%, #0891b2 100%);
+            box-shadow: var(--shadow-md);
+        }
+
+        .btn-sm {
+            padding: 0.625rem 1.25rem;
+            font-size: 0.8rem;
+        }
+
+        /* Enhanced Forms */
+        .form-control {
+            border: 2px solid var(--border-color);
+            border-radius: var(--radius-md);
+            padding: 1rem 1.25rem;
+            transition: var(--transition-normal);
+            background: var(--bg-glass);
+            backdrop-filter: blur(10px);
+            font-weight: 500;
+            color: var(--text-primary);
+        }
+
+        .form-control:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.2);
+            background: var(--bg-secondary);
+            color: var(--text-primary);
+        }
+
+        .form-control:hover {
+            border-color: var(--primary-light);
+        }
+
+        .form-control::placeholder {
+            color: var(--text-muted);
+        }
+
+        .form-select {
+            border: 2px solid var(--border-color);
+            border-radius: var(--radius-md);
+            padding: 1rem 1.25rem;
+            transition: var(--transition-normal);
+            background: var(--bg-glass);
+            backdrop-filter: blur(10px);
+            font-weight: 500;
+            color: var(--text-primary);
+        }
+
+        .form-select:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.2);
+            background: var(--bg-secondary);
+            color: var(--text-primary);
+        }
+
+        .form-check-input {
+            width: 1.5rem;
+            height: 1.5rem;
+            margin-top: 0.25rem;
+            border: 2px solid var(--border-color);
+            border-radius: var(--radius-sm);
+            background: var(--bg-glass);
+            backdrop-filter: blur(10px);
+            transition: var(--transition-normal);
+        }
+
+        .form-check-input:checked {
+            background-color: var(--primary-color);
+            border-color: var(--primary-color);
+            box-shadow: 0 0 10px rgba(99, 102, 241, 0.3);
+        }
+
+        .form-check-label {
+            font-weight: 500;
+            color: var(--text-secondary);
+            margin-left: 0.5rem;
+        }
+
+        /* Settings Page Specific */
+        .settings-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .settings-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .settings-header h1 {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 700;
+            font-size: 2.5rem;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1rem;
+        }
+
+        .settings-header p {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            font-weight: 500;
+        }
+
+        .settings-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+            gap: 2rem;
+        }
+
+        .setting-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 1rem 0;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .setting-item:last-child {
+            border-bottom: none;
+        }
+
+        .setting-label {
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 0.25rem;
+        }
+
+        .setting-description {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        .theme-selector {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .theme-option {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border: 3px solid var(--border-color);
+            cursor: pointer;
+            transition: var(--transition-normal);
+            position: relative;
+        }
+
+        .theme-option.active {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 15px rgba(99, 102, 241, 0.4);
+        }
+
+        .theme-option:hover {
+            transform: scale(1.1);
+        }
+
+        .theme-dark {
+            background: linear-gradient(135deg, #0f172a, #1e293b);
+        }
+
+        .theme-blue {
+            background: linear-gradient(135deg, #1e40af, #3b82f6);
+        }
+
+        .theme-green {
+            background: linear-gradient(135deg, #059669, #10b981);
+        }
+
+        .theme-purple {
+            background: linear-gradient(135deg, #7c3aed, #8b5cf6);
+        }
+
+        .progress-ring {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: conic-gradient(var(--primary-color) 0deg, var(--bg-tertiary) 0deg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .progress-ring::before {
+            content: '';
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            background: var(--bg-glass);
+            position: absolute;
+        }
+
+        .progress-text {
+            font-weight: 700;
+            font-size: 0.9rem;
+            color: var(--text-primary);
+            z-index: 1;
+        }
+
+        .notification-item {
+            display: flex;
+            align-items: center;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            background: var(--bg-glass);
+            border-radius: var(--radius-lg);
+            border: 1px solid var(--border-color);
+            transition: var(--transition-normal);
+        }
+
+        .notification-item:hover {
+            background: rgba(99, 102, 241, 0.1);
+            border-color: var(--primary-color);
+        }
+
+        .notification-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 1rem;
+            font-size: 1.2rem;
+        }
+
+        .notification-success {
+            background: var(--success-color);
+            color: white;
+        }
+
+        .notification-warning {
+            background: var(--warning-color);
+            color: white;
+        }
+
+        .notification-info {
+            background: var(--info-color);
+            color: white;
+        }
+
+        .toggle-switch {
+            position: relative;
+            display: inline-block;
+            width: 60px;
+            height: 34px;
+        }
+
+        .toggle-switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: var(--bg-tertiary);
+            transition: var(--transition-normal);
+            border-radius: 34px;
+        }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 26px;
+            width: 26px;
+            left: 4px;
+            bottom: 4px;
+            background: white;
+            transition: var(--transition-normal);
+            border-radius: 50%;
+        }
+
+        input:checked + .slider {
+            background: var(--primary-color);
+            box-shadow: 0 0 15px rgba(99, 102, 241, 0.4);
+        }
+
+        input:checked + .slider:before {
+            transform: translateX(26px);
+        }
+
+        .stat-card {
+            background: var(--bg-glass);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-lg);
+            padding: 1.5rem;
+            text-align: center;
+            transition: var(--transition-normal);
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .stat-value {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+
+        @media (max-width: 768px) {
+            .settings-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .settings-container {
+                padding: 1rem;
+            }
+            
+            .settings-header h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Enhanced Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="/home">
+                <i class="fas fa-capsules me-2"></i>MediTrack AI
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/dashboard">
+                            <i class="fas fa-chart-line me-2"></i>Dashboard
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="/settings">
+                            <i class="fas fa-cog me-2"></i>Settings
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="btn btn-danger btn-sm ms-2" href="/logout">
+                            <i class="fas fa-sign-out-alt me-2"></i>Logout
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="settings-container">
+        <!-- Settings Header -->
+        <div class="settings-header">
+            <h1><i class="fas fa-cogs me-3"></i>System Settings</h1>
+            <p>Customize your MediTrack AI experience and manage system preferences</p>
+        </div>
+
+        <!-- Settings Grid -->
+        <div class="settings-grid">
+            <!-- Theme & Appearance -->
+            <div class="card mb-4">
+                <div class="card-header">
+                    <i class="fas fa-palette me-2"></i>Theme & Appearance
+                </div>
+                <div class="card-body">
+                    <div class="setting-item">
+                        <div>
+                            <div class="setting-label">Theme Selection</div>
+                            <div class="setting-description">Choose your preferred color scheme</div>
+                        </div>
+                        <div class="theme-selector">
+                            <div class="theme-option theme-dark active" data-theme="dark"></div>
+                            <div class="theme-option theme-blue" data-theme="blue"></div>
+                            <div class="theme-option theme-green" data-theme="green"></div>
+                            <div class="theme-option theme-purple" data-theme="purple"></div>
+                        </div>
+                    </div>
+                    <div class="setting-item">
+                        <div>
+                            <div class="setting-label">Dark Mode</div>
+                            <div class="setting-description">Toggle between light and dark themes</div>
+                        </div>
+                        <label class="toggle-switch">
+                            <input type="checkbox" id="darkModeToggle" checked>
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+                    <div class="setting-item">
+                        <div>
+                            <div class="setting-label">Sidebar Animation</div>
+                            <div class="setting-description">Enable smooth transitions for navigation</div>
+                        </div>
+                        <label class="toggle-switch">
+                            <input type="checkbox" id="animationToggle" checked>
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Notifications -->
+            <div class="card mb-4">
+                <div class="card-header bg-info">
+                    <i class="fas fa-bell me-2"></i>Notifications
+                </div>
+                <div class="card-body">
+                    <div class="setting-item">
+                        <div>
+                            <div class="setting-label">Low Stock Alerts</div>
+                            <div class="setting-description">Get notified when inventory is running low</div>
+                        </div>
+                        <label class="toggle-switch">
+                            <input type="checkbox" id="lowStockAlerts" checked>
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+                    <div class="setting-item">
+                        <div>
+                            <div class="setting-label">Email Notifications</div>
+                            <div class="setting-description">Receive alerts via email</div>
+                        </div>
+                        <label class="toggle-switch">
+                            <input type="checkbox" id="emailNotifications">
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+                    <div class="setting-item">
+                        <div>
+                            <div class="setting-label">Push Notifications</div>
+                            <div class="setting-description">Browser push notifications</div>
+                        </div>
+                        <label class="toggle-switch">
+                            <input type="checkbox" id="pushNotifications" checked>
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+                    <div class="setting-item">
+                        <div>
+                            <div class="setting-label">Alert Threshold</div>
+                            <div class="setting-description">Set minimum stock level for alerts</div>
+                        </div>
+                        <select class="form-select" id="alertThreshold" style="width: 120px;">
+                            <option value="10">10 units</option>
+                            <option value="20" selected>20 units</option>
+                            <option value="50">50 units</option>
+                            <option value="100">100 units</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Security -->
+            <div class="card mb-4">
+                <div class="card-header bg-warning">
+                    <i class="fas fa-shield-alt me-2"></i>Security
+                </div>
+                <div class="card-body">
+                    <div class="setting-item">
+                        <div>
+                            <div class="setting-label">Two-Factor Authentication</div>
+                            <div class="setting-description">Add an extra layer of security</div>
+                        </div>
+                        <label class="toggle-switch">
+                            <input type="checkbox" id="twoFactorAuth">
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+                    <div class="setting-item">
+                        <div>
+                            <div class="setting-label">Session Timeout</div>
+                            <div class="setting-description">Automatically log out after inactivity</div>
+                        </div>
+                        <select class="form-select" id="sessionTimeout" style="width: 140px;">
+                            <option value="15">15 minutes</option>
+                            <option value="30" selected>30 minutes</option>
+                            <option value="60">1 hour</option>
+                            <option value="120">2 hours</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Current Password</label>
+                        <input type="password" id="currentPassword" class="form-control" placeholder="Enter current password">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">New Password</label>
+                        <input type="password" id="newPassword" class="form-control" placeholder="Enter new password">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Confirm New Password</label>
+                        <input type="password" id="confirmPassword" class="form-control" placeholder="Confirm new password">
+                    </div>
+                    <button class="btn btn-danger" onclick="updatePassword()">
+                        <i class="fas fa-key me-2"></i>Update Password
+                    </button>
+                </div>
+            </div>
+
+            <!-- Data & Analytics -->
+            <div class="card mb-4">
+                <div class="card-header bg-success">
+                    <i class="fas fa-chart-bar me-2"></i>Data & Analytics
+                </div>
+                <div class="card-body">
+                    <div class="setting-item">
+                        <div>
+                            <div class="setting-label">Data Retention Period</div>
+                            <div class="setting-description">How long to keep historical data</div>
+                        </div>
+                        <select class="form-select" id="dataRetention" style="width: 120px;">
+                            <option value="6">6 months</option>
+                            <option value="12" selected>1 year</option>
+                            <option value="24">2 years</option>
+                            <option value="36">3 years</option>
+                        </select>
+                    </div>
+                    <div class="setting-item">
+                        <div>
+                            <div class="setting-label">Auto Backup</div>
+                            <div class="setting-description">Automatically backup data daily</div>
+                        </div>
+                
+                        <script src="{{ url_for('static', filename='js/settings.js') }}"></script>
+                      </body>
+                    </html>

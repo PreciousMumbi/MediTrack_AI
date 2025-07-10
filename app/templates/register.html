@@ -1,0 +1,681 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Register | MediTrack AI</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    /* Registration Page Specific Styles */
+    body {
+      background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #334155 100%);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      color: var(--text-primary);
+      margin: 0;
+      padding: 20px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: 
+        radial-gradient(circle at 20% 20%, rgba(99, 102, 241, 0.15) 0%, transparent 50%),
+        radial-gradient(circle at 80% 80%, rgba(16, 185, 129, 0.15) 0%, transparent 50%),
+        radial-gradient(circle at 50% 50%, rgba(245, 158, 11, 0.08) 0%, transparent 50%);
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    /* Floating particles */
+    .particles {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    .particle {
+      position: absolute;
+      width: 4px;
+      height: 4px;
+      background: var(--primary-color);
+      border-radius: 50%;
+      opacity: 0.3;
+      animation: float 6s infinite ease-in-out;
+    }
+
+    .particle:nth-child(1) { left: 10%; animation-delay: 0s; }
+    .particle:nth-child(2) { left: 20%; animation-delay: 1s; }
+    .particle:nth-child(3) { left: 30%; animation-delay: 2s; }
+    .particle:nth-child(4) { left: 40%; animation-delay: 3s; }
+    .particle:nth-child(5) { left: 50%; animation-delay: 4s; }
+    .particle:nth-child(6) { left: 60%; animation-delay: 5s; }
+    .particle:nth-child(7) { left: 70%; animation-delay: 2s; }
+    .particle:nth-child(8) { left: 80%; animation-delay: 3s; }
+    .particle:nth-child(9) { left: 90%; animation-delay: 1s; }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+      10% { opacity: 0.3; }
+      50% { opacity: 0.6; }
+      90% { opacity: 0.3; }
+    }
+
+    .register-container {
+      max-width: 480px;
+      width: 100%;
+      padding: 3.5rem;
+      background: var(--bg-glass);
+      backdrop-filter: blur(25px);
+      border-radius: var(--radius-xl);
+      box-shadow: 
+        var(--shadow-xl),
+        0 0 0 1px rgba(255, 255, 255, 0.05),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(99, 102, 241, 0.2);
+      position: relative;
+      overflow: hidden;
+      animation: slideUp 1s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .register-container::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, var(--primary-color), var(--secondary-color), var(--accent-color));
+      animation: shimmer 3s infinite;
+      background-size: 200% 100%;
+    }
+
+    .register-container::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: 
+        radial-gradient(circle at 30% 30%, rgba(99, 102, 241, 0.08) 0%, transparent 50%),
+        radial-gradient(circle at 70% 70%, rgba(16, 185, 129, 0.08) 0%, transparent 50%);
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    .brand-header {
+      text-align: center;
+      margin-bottom: 3rem;
+      position: relative;
+    }
+
+    .brand-logo {
+      font-size: 3rem;
+      background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 1rem;
+      display: block;
+      animation: pulse 2s infinite;
+    }
+
+    .register-container h3 {
+      font-family: 'Poppins', sans-serif;
+      font-weight: 700;
+      font-size: 2.2rem;
+      color: var(--text-primary);
+      text-align: center;
+      margin-bottom: 0.5rem;
+      position: relative;
+      text-shadow: 0 0 20px rgba(99, 102, 241, 0.3);
+    }
+
+    .subtitle {
+      color: var(--text-muted);
+      text-align: center;
+      margin-bottom: 2.5rem;
+      font-size: 1rem;
+      font-weight: 400;
+    }
+
+    .form-group {
+      position: relative;
+      margin-bottom: 2rem;
+    }
+
+    .form-group i {
+      position: absolute;
+      left: 1.5rem;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--text-muted);
+      font-size: 1.1rem;
+      transition: var(--transition-normal);
+      z-index: 1;
+    }
+
+    .form-control {
+      border: 2px solid var(--border-color);
+      border-radius: var(--radius-md);
+      padding: 1.25rem 1.5rem 1.25rem 3.5rem;
+      background: var(--bg-glass);
+      backdrop-filter: blur(15px);
+      font-weight: 500;
+      color: var(--text-primary);
+      font-size: 1rem;
+      transition: var(--transition-normal);
+      position: relative;
+      width: 100%;
+    }
+
+    .form-control:focus {
+      border-color: var(--primary-color);
+      box-shadow: 
+        0 0 0 3px rgba(99, 102, 241, 0.2),
+        0 0 20px rgba(99, 102, 241, 0.15);
+      background: var(--bg-secondary);
+      color: var(--text-primary);
+      transform: translateY(-2px);
+    }
+
+    .form-control:focus + i {
+      color: var(--primary-color);
+      transform: translateY(-50%) scale(1.1);
+    }
+
+    .form-control:hover {
+      border-color: var(--primary-light);
+      transform: translateY(-1px);
+    }
+
+    .form-control::placeholder {
+      color: var(--text-muted);
+      opacity: 0.7;
+    }
+
+    .form-label {
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-bottom: 0.75rem;
+      font-size: 0.95rem;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      position: relative;
+      display: block;
+    }
+
+    .strength-meter {
+      height: 4px;
+      background: var(--bg-tertiary);
+      border-radius: 2px;
+      margin-top: 0.5rem;
+      overflow: hidden;
+      opacity: 0;
+      transition: var(--transition-normal);
+    }
+
+    .strength-meter.active {
+      opacity: 1;
+    }
+
+    .strength-bar {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, var(--danger-color), var(--warning-color), var(--success-color));
+      transition: width 0.3s ease;
+      border-radius: 2px;
+    }
+
+    .strength-text {
+      font-size: 0.8rem;
+      margin-top: 0.25rem;
+      color: var(--text-muted);
+      opacity: 0;
+      transition: var(--transition-normal);
+    }
+
+    .strength-text.active {
+      opacity: 1;
+    }
+
+    .btn {
+      font-weight: 600;
+      border-radius: var(--radius-md);
+      padding: 1.25rem 2rem;
+      transition: var(--transition-normal);
+      position: relative;
+      overflow: hidden;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      font-size: 0.95rem;
+      border: none;
+      font-family: 'Poppins', sans-serif;
+      cursor: pointer;
+    }
+
+    .btn::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+      transition: var(--transition-normal);
+    }
+
+    .btn:hover::before {
+      left: 100%;
+    }
+
+    .btn-success {
+      background: linear-gradient(135deg, var(--success-color) 0%, #059669 100%);
+      box-shadow: var(--shadow-md);
+      color: white;
+      position: relative;
+    }
+
+    .btn-success:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 0 30px rgba(16, 185, 129, 0.4);
+      background: linear-gradient(135deg, #059669 0%, var(--success-color) 100%);
+    }
+
+    .btn-success:active {
+      transform: translateY(0);
+    }
+
+    .btn-link {
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-weight: 500;
+      transition: var(--transition-normal);
+      background: transparent;
+      border: 2px solid transparent;
+      border-radius: var(--radius-md);
+      padding: 0.75rem 1.5rem;
+      text-transform: none;
+      letter-spacing: normal;
+      font-size: 0.9rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .btn-link::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(135deg, transparent, rgba(99, 102, 241, 0.05), transparent);
+      transform: translateX(-100%);
+      transition: var(--transition-normal);
+    }
+
+    .btn-link:hover::before {
+      transform: translateX(0);
+    }
+
+    .btn-link:hover {
+      color: var(--text-primary);
+      background: rgba(99, 102, 241, 0.1);
+      border-color: var(--primary-color);
+      transform: translateY(-2px);
+      text-decoration: none;
+    }
+
+    .alert {
+      border-radius: var(--radius-md);
+      border: none;
+      padding: 1.25rem 1.5rem;
+      margin-bottom: 1.5rem;
+      font-weight: 500;
+      backdrop-filter: blur(15px);
+      animation: slideDown 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .alert::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 4px;
+      background: currentColor;
+    }
+
+    .alert-success {
+      background: rgba(16, 185, 129, 0.15);
+      color: var(--success-color);
+      border: 1px solid rgba(16, 185, 129, 0.3);
+    }
+
+    .alert-danger {
+      background: rgba(239, 68, 68, 0.15);
+      color: var(--danger-color);
+      border: 1px solid rgba(239, 68, 68, 0.3);
+    }
+
+    .alert-warning {
+      background: rgba(245, 158, 11, 0.15);
+      color: var(--warning-color);
+      border: 1px solid rgba(245, 158, 11, 0.3);
+    }
+
+    .alert-info {
+      background: rgba(6, 182, 212, 0.15);
+      color: var(--info-color);
+      border: 1px solid rgba(6, 182, 212, 0.3);
+    }
+
+    .loading-spinner {
+      display: none;
+      width: 20px;
+      height: 20px;
+      border: 2px solid transparent;
+      border-top: 2px solid currentColor;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+      margin-left: 10px;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    .btn-success.loading {
+      pointer-events: none;
+      opacity: 0.8;
+    }
+
+    .btn-success.loading .loading-spinner {
+      display: inline-block;
+    }
+
+    /* Animations */
+    @keyframes slideUp {
+      0% {
+        opacity: 0;
+        transform: translateY(50px) scale(0.95);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+
+    @keyframes slideDown {
+      0% {
+        opacity: 0;
+        transform: translateY(-20px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes shimmer {
+      0% { background-position: -200% 0; }
+      100% { background-position: 200% 0; }
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .register-container {
+        margin: 20px;
+        padding: 2.5rem;
+        max-width: 100%;
+      }
+      
+      .register-container h3 {
+        font-size: 1.8rem;
+      }
+      
+      .brand-logo {
+        font-size: 2.5rem;
+      }
+      
+      .form-control {
+        padding: 1rem 1.25rem 1rem 3rem;
+      }
+      
+      .btn {
+        padding: 1rem 1.5rem;
+      }
+    }
+
+    /* Focus management */
+    .form-control:focus {
+      outline: none;
+    }
+
+    /* Enhanced validation styles */
+    .form-control.is-valid {
+      border-color: var(--success-color);
+      background-image: none;
+    }
+
+    .form-control.is-invalid {
+      border-color: var(--danger-color);
+      background-image: none;
+    }
+
+    /* Tooltip styles */
+    .tooltip {
+      position: relative;
+      display: inline-block;
+    }
+
+    .tooltip .tooltiptext {
+      visibility: hidden;
+      width: 200px;
+      background-color: var(--bg-secondary);
+      color: var(--text-primary);
+      text-align: center;
+      border-radius: var(--radius-sm);
+      padding: 8px;
+      position: absolute;
+      z-index: 1;
+      bottom: 125%;
+      left: 50%;
+      margin-left: -100px;
+      opacity: 0;
+      transition: opacity 0.3s;
+      font-size: 0.8rem;
+      border: 1px solid var(--border-color);
+    }
+
+    .tooltip:hover .tooltiptext {
+      visibility: visible;
+      opacity: 1;
+    }
+
+    /* Social login section placeholder */
+    .divider {
+      display: flex;
+      align-items: center;
+      margin: 2rem 0;
+      color: var(--text-muted);
+      font-size: 0.9rem;
+    }
+
+    .divider::before,
+    .divider::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--border-color);
+    }
+
+    .divider span {
+      padding: 0 1rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="particles">
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+  </div>
+
+  <div class="register-container">
+    <div class="brand-header">
+      <i class="fas fa-user-plus brand-logo"></i>
+      <h3>Create Account</h3>
+      <p class="subtitle">Join MediTrack AI to manage your medical inventory</p>
+    </div>
+
+    
+
+    <form method="POST" action="/register" id="registerForm">
+      <div class="form-group">
+        <label class="form-label" for="username">Username</label>
+        <input type="text" name="username" id="username" class="form-control" placeholder="Enter your username" required autocomplete="username">
+        <i class="fas fa-user"></i>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="password">Password</label>
+        <input type="password" name="password" id="password" class="form-control" placeholder="Create a secure password" required autocomplete="new-password">
+        <i class="fas fa-lock"></i>
+        <div class="strength-meter">
+          <div class="strength-bar"></div>
+        </div>
+        <div class="strength-text">Password strength: <span id="strengthLevel">Weak</span></div>
+      </div>
+
+      <button type="submit" class="btn btn-success w-100" id="submitBtn">
+        <i class="fas fa-user-plus"></i> Create Account
+        <div class="loading-spinner"></div>
+      </button>
+    </form>
+
+    <div class="divider">
+      <span>Already have an account?</span>
+    </div>
+
+    <a href="/login" class="btn btn-link w-100">
+      <i class="fas fa-sign-in-alt"></i> Sign In Instead
+    </a>
+  </div>
+
+  <script>
+    // Password strength checker
+    const passwordInput = document.getElementById('password');
+    const strengthMeter = document.querySelector('.strength-meter');
+    const strengthBar = document.querySelector('.strength-bar');
+    const strengthText = document.querySelector('.strength-text');
+    const strengthLevel = document.getElementById('strengthLevel');
+
+    passwordInput.addEventListener('input', function() {
+      const password = this.value;
+      const strength = calculatePasswordStrength(password);
+      
+      if (password.length > 0) {
+        strengthMeter.classList.add('active');
+        strengthText.classList.add('active');
+        
+        strengthBar.style.width = strength.percentage + '%';
+        strengthLevel.textContent = strength.level;
+        
+        // Change color based on strength
+        if (strength.percentage < 40) {
+          strengthBar.style.background = 'var(--danger-color)';
+          strengthLevel.style.color = 'var(--danger-color)';
+        } else if (strength.percentage < 70) {
+          strengthBar.style.background = 'var(--warning-color)';
+          strengthLevel.style.color = 'var(--warning-color)';
+        } else {
+          strengthBar.style.background = 'var(--success-color)';
+          strengthLevel.style.color = 'var(--success-color)';
+        }
+      } else {
+        strengthMeter.classList.remove('active');
+        strengthText.classList.remove('active');
+      }
+    });
+
+    function calculatePasswordStrength(password) {
+      let score = 0;
+      let level = 'Weak';
+
+      if (password.length >= 8) score += 20;
+      if (password.length >= 12) score += 10;
+      if (/[a-z]/.test(password)) score += 10;
+      if (/[A-Z]/.test(password)) score += 15;
+      if (/[0-9]/.test(password)) score += 15;
+      if (/[^A-Za-z0-9]/.test(password)) score += 20;
+      if (password.length >= 16) score += 10;
+
+      if (score >= 80) level = 'Very Strong';
+      else if (score >= 60) level = 'Strong';
+      else if (score >= 40) level = 'Fair';
+      else if (score >= 20) level = 'Weak';
+      else level = 'Very Weak';
+
+      return { percentage: Math.min(score, 100), level: level };
+    }
+
+    // Form submission with loading state
+    document.getElementById('registerForm').addEventListener('submit', function() {
+      const submitBtn = document.getElementById('submitBtn');
+      submitBtn.classList.add('loading');
+      submitBtn.innerHTML = '<i class="fas fa-user-plus"></i> Creating Account...<div class="loading-spinner"></div>';
+    });
+
+    // Input validation feedback
+    const inputs = document.querySelectorAll('.form-control');
+    inputs.forEach(input => {
+      input.addEventListener('blur', function() {
+        if (this.checkValidity()) {
+          this.classList.remove('is-invalid');
+          this.classList.add('is-valid');
+        } else {
+          this.classList.remove('is-valid');
+          this.classList.add('is-invalid');
+        }
+      });
+    });
+
+    // Enhanced focus management
+    document.addEventListener('DOMContentLoaded', function() {
+      const firstInput = document.querySelector('input[type="text"]');
+      if (firstInput) {
+        setTimeout(() => firstInput.focus(), 500);
+      }
+    });
+  </script>
+</body>
+</html>
