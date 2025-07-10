@@ -34,6 +34,13 @@ Target 3.D: Strengthen the capacity for early warning, risk reduction, and manag
 
 
 
+
+
+
+
+
+
+
 ⚙️ How It Works
 Key Features:
 
@@ -98,8 +105,24 @@ Alternatively, you can create your own account with a custom username and passwo
 
 
 
+
+
+
+
+
+
 📑 Pitch Deck
 View the project pitch deck detailing the problem statement, solution design, AI implementation, and expected impact:
+
+
+
+
+
+
+
+
+
+
 👉 https:https://gamma.app/docs/MediTrack-AI-Smart-Medicine-Stock-Tracking-Platform-4kbnmtn2tdsxm7k
 
 
