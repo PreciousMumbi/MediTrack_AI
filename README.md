@@ -2,6 +2,11 @@
 
 
 📌 OVERVIEW
+
+
+
+
+
 MediTrack AI is a pharmacy inventory management and demand forecasting system that leverages artificial intelligence to optimize medicine stock levels, minimize waste, and prevent shortages. This platform empowers pharmacy managers and healthcare facilities to make data-driven decisions for improved operational efficiency and patient care outcomes.
 
 Built with a modern, responsive UI using HTML, CSS, Bootstrap, and JavaScript, and powered by a Python Flask backend with SQLite for data management, MediTrack AI integrates predictive analytics models to anticipate stock requirements based on historical data.
@@ -9,6 +14,11 @@ Built with a modern, responsive UI using HTML, CSS, Bootstrap, and JavaScript, a
 
 
 🌍 Sustainable Development Goal Alignment
+
+
+
+
+
 This project directly supports United Nations Sustainable Development Goal (SDG) 3: Good Health and Well-Being.
 By ensuring consistent availability of essential medicines through AI-driven demand prediction and inventory tracking, MediTrack AI contributes to:
 
