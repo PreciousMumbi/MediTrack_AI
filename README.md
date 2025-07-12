@@ -86,7 +86,7 @@ AI prediction model informs restocking decisions, reducing wastage and stockouts
 
 
 🌐 Live Demo
-👉 https:http://127.0.0.1:5000/
+👉 https: https://meditrack-ai-4.onrender.com
 
 Test Account Credentials:
 
